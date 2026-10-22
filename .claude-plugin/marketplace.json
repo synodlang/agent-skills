@@ -1,0 +1,13 @@
+{
+  "name": "synodlang",
+  "owner": {
+    "name": "synodlang"
+  },
+  "plugins": [
+    {
+      "name": "synod",
+      "source": "./",
+      "description": "Teaches coding agents to read, write, check and run Synod programs that model distributed systems for animation."
+    }
+  ]
+}

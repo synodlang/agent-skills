@@ -5,6 +5,8 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    - cron: "17 5 * * *"
 
 permissions:
   contents: read
@@ -34,8 +36,83 @@ jobs:
               echo "::error file=$f::missing newline at end of file"
               status=1
             fi
-          done < <(git ls-files -z -- '*.md' '*.json' '*.yml')
+          done < <(git ls-files -z -- '*.md' '*.json' '*.yml' '*.go' '*.mod' '*.env' '*.synod')
           echo "Checked $count file(s)."
           exit $status
 
-  # Later: skills sync, through synodlang/.github/.github/workflows/skills-sync.yml@main.
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Read the pins
+        run: cat versions.env >> "$GITHUB_ENV"
+      - uses: actions/checkout@v7
+        with:
+          repository: synodlang/dsl
+          ref: ${{ env.DSL_VERSION }}
+          path: _pins/dsl
+      - uses: actions/checkout@v7
+        with:
+          repository: synodlang/examples
+          ref: ${{ env.EXAMPLES_VERSION }}
+          path: _pins/examples
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+      - name: Install the pinned synod
+        run: |
+          base="synod-${SYNOD_VERSION}-linux-amd64"
+          curl -fsSL -o "${RUNNER_TEMP}/${base}.tar.gz" \
+            "https://github.com/synodlang/compiler/releases/download/${SYNOD_VERSION}/${base}.tar.gz"
+          echo "${SYNOD_LINUX_AMD64_SHA256}  ${RUNNER_TEMP}/${base}.tar.gz" | sha256sum --check -
+          mkdir -p "${RUNNER_TEMP}/bin"
+          tar -xzf "${RUNNER_TEMP}/${base}.tar.gz" -C "${RUNNER_TEMP}/bin" synod
+          echo "${RUNNER_TEMP}/bin" >> "$GITHUB_PATH"
+      - name: Check that the generated files are up to date
+        run: |
+          synod version
+          go run ./tools/sync --check -dsl _pins/dsl -examples _pins/examples
+      - name: Check the examples
+        working-directory: skills/synod/reference/examples
+        run: |
+          synod fmt --check .
+          synod check .
+      - name: Check the code blocks of the skill files
+        run: |
+          go run ./tools/sync -blocks "${RUNNER_TEMP}/blocks"
+          cd "${RUNNER_TEMP}/blocks"
+          synod fmt --check .
+          synod check .
+
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Look for newer releases than the pins
+        shell: bash
+        run: |
+          set -a
+          . ./versions.env
+          set +a
+          status=0
+          newest() {
+            git ls-remote --tags --refs "https://github.com/synodlang/$1.git" 'refs/tags/v0.2.*' \
+              | sed 's|.*refs/tags/||' | grep -E '^v0\.2\.[0-9]+$' | sort -V | tail -n 1
+          }
+          check() {
+            repo="$1"; pin="$2"
+            latest="$(newest "$repo")"
+            if [ -z "$latest" ]; then
+              echo "::error::no v0.2.x tag found for $repo"
+              status=1
+            elif [ "$(printf '%s\n%s\n' "$pin" "$latest" | sort -V | tail -n 1)" != "$pin" ]; then
+              echo "::error::$repo has $latest, but versions.env pins $pin"
+              status=1
+            else
+              echo "$repo: pinned $pin, newest $latest"
+            fi
+          }
+          check dsl "$DSL_VERSION"
+          check compiler "$SYNOD_VERSION"
+          check examples "$EXAMPLES_VERSION"
+          exit $status
