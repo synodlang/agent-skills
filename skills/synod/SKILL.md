@@ -6,7 +6,7 @@ description: Read, write, check and run Synod (.synod) programs that model
   "animate" or "simulate" a protocol in a Synod workspace.
 ---
 
-<!-- written for dsl v0.2.10 -->
+<!-- written for dsl v0.2.11 -->
 
 # Writing Synod
 
@@ -168,4 +168,4 @@ They are in `reference/` next to this file.
 | `errors.md` | every diagnostic code with an example and its fix |
 | `examples/` | complete working programs (gossip, raft, paxos, twopc, …) |
 
-Written for dsl v0.2.10.
+Written for dsl v0.2.11.

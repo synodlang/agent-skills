@@ -1,6 +1,6 @@
 {
   "name": "synod",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Teaches coding agents to read, write, check and run Synod programs that model distributed systems for animation.",
   "author": {
     "name": "synodlang"

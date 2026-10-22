@@ -5,6 +5,15 @@ text of its GitHub release page.
 
 ## Unreleased
 
+## v0.2.1 — 2026-10-22
+
+Implements Synod 0.2; follows dsl v0.2.11.
+
+### Changed
+
+- Re-stamped the hand-written files (`SKILL.md`, `AGENTS.md`, `grammar.md`, `phrases.md`, `contexts.md`) for dsl v0.2.11, which changed only the implementation documents and decision 94 about `synod new` and `synod get`; no rule of the skill changed.
+- Regenerated the references from dsl v0.2.11; the pins `synod` v0.2.6 and examples v0.2.1 are unchanged.
+
 ## v0.2.0 — 2026-10-22
 
 Implements Synod 0.2. The first release of the skills: a Claude Code plugin that teaches an agent to look, write, format, check and run Synod, with the same entry point as `AGENTS.md` for other agents.
