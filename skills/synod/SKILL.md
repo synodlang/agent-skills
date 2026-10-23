@@ -6,7 +6,7 @@ description: Read, write, check and run Synod (.synod) programs that model
   "animate" or "simulate" a protocol in a Synod workspace.
 ---
 
-<!-- written for dsl v0.2.11 -->
+<!-- written for dsl v0.2.12 -->
 
 # Writing Synod
 
@@ -17,8 +17,9 @@ Synod programs are plain-text sentences in `.synod` files. You write them,
 
 1. **Look.** Run `synod doc` to list the packages and `synod doc <package>` for
    one package's phrases. Search the workspace for an existing package. To use
-   the examples, run `synod get github.com/synodlang/examples@v0.2.1`, then
-   `use github.com/synodlang/examples/twopc` (it is copied to `vendor/`).
+   the examples, `synod get github.com/synodlang/examples@v0.2.1` (the user's
+   step when you have no shell), then `use github.com/synodlang/examples/twopc`
+   (it is copied to `vendor/`).
 2. **Write.** Prefer only a main file (`define main`, typically 10-30 lines)
    that uses an existing package. Write a new package only when none models
    the behaviour.
@@ -134,6 +135,12 @@ The module here is `github.com/acme/demo`. Run it with `synod run <folder>`.
 When tools named `mcp__synod-editor__*` exist, the Mac app's editor holds the
 files. Do not write files any other way.
 
+0. **Look.** There is no shell in this mode. Use the `synod` MCP tools `doc`,
+   `explain`, `check` and `run_summary`, and Read, Glob and Grep on the
+   reference files. When only the editor and `synod` tools exist, `synod get`
+   is the user's step: if a needed package is not in `vendor/`, stop and ask
+   the user to run `synod get github.com/synodlang/examples@v0.2.1` (or use the
+   bundled examples under the reference folder as a model).
 1. `read_buffer` a file before editing it (it shows unsaved changes and
    returns the `version`).
 2. Change it with `apply_edits` (small edits, needs the current `version`) or
@@ -144,7 +151,8 @@ files. Do not write files any other way.
 6. Only then `run_summary`.
 
 Use the `synod` MCP tools `doc`, `explain`, `check` and `run_summary` when
-present; they give the same output as the commands above.
+present; they give the same output as the commands above. Do not try `Bash`,
+`Write` or `Edit`; they are not available.
 
 ## Budget rules
 
@@ -168,4 +176,4 @@ They are in `reference/` next to this file.
 | `errors.md` | every diagnostic code with an example and its fix |
 | `examples/` | complete working programs (gossip, raft, paxos, twopc, …) |
 
-Written for dsl v0.2.11.
+Written for dsl v0.2.12.

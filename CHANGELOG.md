@@ -5,6 +5,15 @@ text of its GitHub release page.
 
 ## Unreleased
 
+## v0.2.2 — 2026-10-23
+
+Implements Synod 0.2; follows dsl v0.2.12.
+
+### Changed
+
+- The prompt bar of the Mac app now restricts Claude Code's built-in tools to Read, Glob and Grep, so `SKILL.md` and `AGENTS.md` tell an agent with the synod-editor tools that there is no shell, that `synod get` is the user's step, and that `Bash`, `Write` and `Edit` are not available.
+- Re-stamped the hand-written files for dsl v0.2.12 and regenerated the references; the pins `synod` v0.2.6 and examples v0.2.1 are unchanged.
+
 ## v0.2.1 — 2026-10-22
 
 Implements Synod 0.2; follows dsl v0.2.11.
