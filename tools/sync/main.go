@@ -346,6 +346,9 @@ func agentsFrom(skill string) (string, error) {
 }
 
 func checkSynod(synod, want string) error {
+	if os.Getenv("SYNC_PRERELEASE") != "" {
+		return nil
+	}
 	b, err := runSynod(synod, "version")
 	if err != nil {
 		return err
@@ -372,8 +375,13 @@ func runSynod(synod string, args ...string) ([]byte, error) {
 	return out.Bytes(), nil
 }
 
-// checkExamples verifies the checkout when it is a git repository.
+// checkExamples verifies the checkout when it is a git repository. With
+// SYNC_PRERELEASE set (a release not yet cut, so the pins are TODO), the
+// compiler version and the examples commit are not checked.
 func checkExamples(dir, commit string) error {
+	if os.Getenv("SYNC_PRERELEASE") != "" || commit == "TODO" {
+		return nil
+	}
 	if _, err := os.Stat(filepath.Join(dir, ".git")); err != nil {
 		return nil
 	}
@@ -442,7 +450,7 @@ func writeBlocks(root, dir string) error {
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return err
 	}
-	if err := os.WriteFile(filepath.Join(dir, "synod.mod"), []byte("module github.com/acme/demo\nsynod 0.2\n"), 0o644); err != nil {
+	if err := os.WriteFile(filepath.Join(dir, "synod.mod"), []byte("module github.com/acme/demo\nsynod 0.3\n"), 0o644); err != nil {
 		return err
 	}
 	seen := map[string]string{}

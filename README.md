@@ -5,7 +5,7 @@ Skills that teach coding agents, such as Claude Code, to read, write, check and 
 [![ci](https://github.com/synodlang/agent-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/synodlang/agent-skills/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
-Install it as a Claude Code plugin, or point any other agent at [AGENTS.md](AGENTS.md). Both teach the agent to look for an existing package, write Synod with the compiler's own checks, and confirm the run shows what was asked. The plan is in [08-agent-skills.md](https://github.com/synodlang/dsl/blob/main/implementation/08-agent-skills.md). You need the `synod` command ([install page](https://synodlang.github.io/install/)); the skills pin `synod` v0.2.7.
+Install it as a Claude Code plugin, or point any other agent at [AGENTS.md](AGENTS.md). Both teach the agent to look for an existing package, write Synod with the compiler's own checks, and confirm the run shows what was asked. The plan is in [08-agent-skills.md](https://github.com/synodlang/dsl/blob/main/implementation/08-agent-skills.md). You need the `synod` command ([install page](https://synodlang.github.io/install/)); the skills pin `synod` v0.3.0.
 
 ## Install
 
@@ -38,13 +38,13 @@ An agent follows these skills to write Synod, and uses the `synod` command to ch
 
 | Repository | What it is | Status |
 | --- | --- | --- |
-| [dsl](https://github.com/synodlang/dsl) | The language specification and implementation guides | Spec v0.2 |
-| [compiler](https://github.com/synodlang/compiler) | The `synod` command: `fmt`, `check`, `run`, `doc`, `explain`, `new`, `get`, `mcp` | v0.2.7 released |
+| [dsl](https://github.com/synodlang/dsl) | The language specification and implementation guides | Spec v0.3 |
+| [compiler](https://github.com/synodlang/compiler) | The `synod` command: `fmt`, `check`, `run`, `doc`, `explain`, `new`, `get`, `mcp` | v0.3.0 in preparation |
 | [std](https://github.com/synodlang/std) | The standard library packages | In use by the compiler |
 | [examples](https://github.com/synodlang/examples) | Sample programs and acceptance tests | Available |
 | [player](https://github.com/synodlang/player) | Canvas library that plays `scene.json` | Planned (M7) |
 | [mac-app](https://github.com/synodlang/mac-app) | The Mac app | Planned (M8, M9, M10) |
-| **agent-skills** (this repository) | Skills for coding agents | v0.2.0 |
+| **agent-skills** (this repository) | Skills for coding agents | v0.3.0 |
 | [synodlang.github.io](https://github.com/synodlang/synodlang.github.io) | The website and documentation | Install page live; rest planned (M11) |
 | [homebrew-tap](https://github.com/synodlang/homebrew-tap) | Homebrew formula for `synod` | Updated by compiler releases |
 | [scoop-bucket](https://github.com/synodlang/scoop-bucket) | Scoop manifest for `synod` | Updated by compiler releases |
@@ -59,7 +59,7 @@ The entry point is a short `SKILL.md`. In outline it tells the agent to:
 3. Qualify imported names (`net.Send`) and never qualify the package's own names.
 4. Name the node with a receiver in node code, and touch only that node's state.
 5. Write explicit types in holes.
-6. Leave looks optional, since the basic look animates everything.
+6. Leave looks and themes optional, since the basic look and the default theme animate everything; choose a theme only in the main file.
 7. Run `synod fmt`, then `synod check` until clean, then `synod run`, and confirm the trace shows what was asked. Never hand back unchecked code.
 
 ## Layout
@@ -82,7 +82,7 @@ versions.env                     the pinned dsl, synod and examples releases
 tools/sync/                      regenerates the generated files
 ```
 
-`grammar.md`, `phrases.md` and `contexts.md` are written by hand, each stamped with the `dsl` tag it was condensed from. Everything marked generated comes from the releases pinned in `versions.env`: `dsl` v0.2.14, `synod` v0.2.7 and examples v0.2.1. The copy in `reference/examples/` is under the examples repository's [CC BY 4.0](https://github.com/synodlang/examples/blob/main/LICENSE) licence.
+`grammar.md`, `phrases.md` and `contexts.md` are written by hand, each stamped with the `dsl` tag it was condensed from. Everything marked generated comes from the releases pinned in `versions.env`: `dsl` v0.3.0, `synod` v0.3.0 and examples v0.3.0. The copy in `reference/examples/` is under the examples repository's [CC BY 4.0](https://github.com/synodlang/examples/blob/main/LICENSE) licence.
 
 ## Using synod from an agent today
 
@@ -106,12 +106,12 @@ go run ./tools/sync -dsl ../dsl -examples ../examples
 go run ./tools/sync -check -dsl ../dsl -examples ../examples
 ```
 
-CI has three jobs. **text** checks line endings, trailing spaces and the final newline. **sync** fails on any difference after regeneration, on a hand-written file stamped with another `dsl` tag, on a `plugin.json` version that is not the newest changelog version, and when `synod fmt --check` or `synod check` fails on the examples or on a whole-file `synod` block of the skill. **stale** fails (on pushes, pull requests and daily) when a newer `v0.2.x` of `dsl`, `compiler` or `examples` exists than the pin.
+CI has three jobs. **text** checks line endings, trailing spaces and the final newline. **sync** fails on any difference after regeneration, on a hand-written file stamped with another `dsl` tag, on a `plugin.json` version that is not the newest changelog version, and when `synod fmt --check` or `synod check` fails on the examples or on a whole-file `synod` block of the skill. **stale** fails (on pushes, pull requests and daily) when a newer `v0.3.x` of `dsl`, `compiler` or `examples` exists than the pin.
 
 ## Why Synod
 
 Synod is named after the Synod protocol, the core consensus algorithm in Leslie Lamport's paper "The Part-Time Parliament" (ACM Transactions on Computer Systems, 1998; first submitted in 1990). The paper tells it as the story of the parliament of the ancient Greek island of Paxos, whose part-time legislators could agree on decrees although they came and went; today the algorithm is known as Paxos. Lamport later explained it plainly in "Paxos Made Simple" (2001), and in 2013 he received the ACM A.M. Turing Award for fundamental contributions to the theory and practice of distributed and concurrent systems. His "Time, Clocks, and the Ordering of Events in a Distributed System" (1978) and his TLA+ specification language shaped how we reason about such systems. We are grateful for his work, and we hope Synod honours it by making these ideas easier to watch and understand. These skills are kept concise, so agents can read and write Synod with care.
 
-Implements Synod 0.2 (specification: https://github.com/synodlang/dsl).
+Implements Synod 0.3 (specification: https://github.com/synodlang/dsl).
 
 Licensed under the [Apache License 2.0](LICENSE).

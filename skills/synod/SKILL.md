@@ -6,7 +6,7 @@ description: Read, write, check and run Synod (.synod) programs that model
   "animate" or "simulate" a protocol in a Synod workspace.
 ---
 
-<!-- written for dsl v0.2.14 -->
+<!-- written for dsl v0.3.0 -->
 
 # Writing Synod
 
@@ -17,7 +17,7 @@ Synod programs are plain-text sentences in `.synod` files. You write them,
 
 1. **Look.** Run `synod doc` to list the packages and `synod doc <package>` for
    one package's phrases. Search the workspace for an existing package. To use
-   the examples, `synod get github.com/synodlang/examples@v0.2.1` (the user's
+   the examples, `synod get github.com/synodlang/examples@v0.3.0` (the user's
    step when you have no shell), then `use github.com/synodlang/examples/twopc`
    (it is copied to `vendor/`).
 2. **Write.** Prefer only a main file (`define main`, typically 10-30 lines)
@@ -47,7 +47,8 @@ Synod programs are plain-text sentences in `.synod` files. You write them,
    `deliver` and faults live in `define main`.
 5. Types are explicit: `[ns: list of Node]`, `[m: map of node to number]`.
    A `node` has no fields; `Node` or `pkg.Node` does.
-6. Looks are optional: `std/look/basic` animates everything by default.
+6. Looks and themes are optional: `std/look/basic` with `std/theme/default`
+   animates everything by default (see Themes).
 7. Run `synod fmt`, then `synod check` until clean, then `synod run` and
    confirm the trace shows what was asked.
 8. Use `synod check --json` for spans, edits and quick fixes, or
@@ -118,6 +119,31 @@ The module here is `github.com/acme/demo`. Run it with `synod run <folder>`.
   phrase up with `synod doc <package>`.
 - A new package gets its own folder, one package per folder.
 
+## Themes
+
+A theme is the skin of a program (colors, type, stroke, sketch, glow, shadow,
+vignette, easing, node shape and fill). Its files start `# theme <word>` and
+hold only `define <Name>` blocks with one `result <literal>` each, one for
+every name of the theme table. The table, with the default values, is in
+`std-catalog.md` (`std/theme`, `std/theme/default`) or `synod doc
+std/theme/default`; copy it and change values, never write a partial theme
+(`bad-theme` names the first missing name).
+
+- A program's theme is the one its main file imports, else
+  `std/theme/default`: `use github.com/synodlang/looks/terminal`. Only a main
+  file imports a theme, and at most one (`theme-outside-main`, `extra-theme`).
+  Never write `use std/theme/default` (`non-canonical`).
+- A theme exports no phrase; a look reads a value as `theme.<Name>`.
+- A theme never changes a run: the trace is the same under every theme. To
+  restyle, change the look or theme; never to fix behavior.
+- A theme is skin; a look is what is drawn and how it moves (arcs, trails,
+  entrances, effects, camera). Any look combines with any theme.
+- The module `github.com/synodlang/looks` (`synod get`) holds the looks
+  `lumen` and `doodle` and the themes `solarized/light`, `solarized/dark`,
+  `terminal`, `sketch` and `chalk`, for example `use
+  github.com/synodlang/looks/lumen` with `use
+  github.com/synodlang/looks/solarized/dark`.
+
 ## Commands
 
 | Command | Use |
@@ -139,7 +165,7 @@ files. Do not write files any other way.
    `explain`, `check` and `run_summary`, and Read, Glob and Grep on the
    reference files. When only the editor and `synod` tools exist, `synod get`
    is the user's step: if a needed package is not in `vendor/`, stop and ask
-   the user to run `synod get github.com/synodlang/examples@v0.2.1` (or use the
+   the user to run `synod get github.com/synodlang/examples@v0.3.0` (or use the
    bundled examples under the reference folder as a model).
 1. `read_buffer` a file before editing it (it shows unsaved changes and
    returns the `version`).
@@ -171,15 +197,15 @@ They are in `reference/` next to this file.
 | `phrases.md` | defining and calling phrases; patterns, resolution, names |
 | `contexts.md` | nodes, state, the four contexts, events, `always` |
 | `canonical.md` | the canonical form `synod fmt` writes |
-| `std-catalog.md` | every std phrase, its type, context and meaning |
+| `std-catalog.md` | every std phrase, its type, context and meaning; the theme table |
 | `trace-events.md` | the facts a run records, for `when` in looks |
 | `errors.md` | every diagnostic code with an example and its fix |
 | `examples/` | complete working programs (gossip, raft, paxos, twopc, …) |
 
 For the user, or when you can read the web, the documentation at
-https://synodlang.github.io/docs/v0.2/ has a 15-chapter tutorial (`tutorial/`),
+https://synodlang.github.io/docs/v0.3/ has a 15-chapter tutorial (`tutorial/`),
 the Library pages (`library/`, with a runnable example for each std package,
 also in `std/examples` of the dsl repository) and the error pages (`errors/`).
 Its guide "Use Synod with Claude or another agent" explains this skill.
 
-Written for dsl v0.2.14.
+Written for dsl v0.3.0.

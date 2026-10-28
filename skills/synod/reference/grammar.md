@@ -1,4 +1,4 @@
-<!-- condensed from dsl v0.2.14 spec/02 -->
+<!-- condensed from dsl v0.3.0 spec/02 -->
 
 # Grammar
 
@@ -26,7 +26,8 @@ list         = "{" [ item { "," item } ] "}" ;
 
 - Comments attach to the line that follows (or the line they trail) and form
   no block or statement. A file may start with the package header
-  (`# package name`), which is also a comment.
+  (`# package name`) or the theme header (`# theme word`), which is also a
+  comment.
 - `use` lines stand only at the top level (nested `use` is a `syntax` error);
   `()` is a `syntax` error.
 - An **item** is what an inline hole receives: one token, one parenthesized

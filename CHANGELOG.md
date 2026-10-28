@@ -5,6 +5,20 @@ text of its GitHub release page.
 
 ## Unreleased
 
+## v0.3.0 — 2026-10-29
+
+Implements Synod 0.3; follows dsl v0.3.0 and compiler v0.3.0.
+
+### Added
+
+- A "Themes" section in `SKILL.md` and `AGENTS.md`: what a theme is, how a main file selects one with `use`, the looks module `github.com/synodlang/looks` (looks `lumen` and `doodle`; themes `solarized/light`, `solarized/dark`, `terminal`, `sketch` and `chalk`), that any look combines with any theme, that a theme never changes a run, and where the table of theme values is.
+- The references now cover `std/theme`, `std/theme/default`, the new `std/look` phrases and the errors `theme-outside-main`, `extra-theme` and `bad-theme`.
+
+### Changed
+
+- Re-stamped the hand-written files for dsl v0.3.0 and regenerated the references; the pins are `synod` v0.3.0 and examples v0.3.0.
+- `tools/sync` writes the `synod 0.3` module for the code-block check, and the stale job looks for `v0.3.x` tags.
+
 ## v0.2.3 — 2026-10-28
 
 Implements Synod 0.2; follows dsl v0.2.14 and compiler v0.2.7.

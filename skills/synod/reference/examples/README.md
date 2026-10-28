@@ -106,7 +106,7 @@ raftlook/  ringlook/   look packages used by the raft and ring demos
 webapp/
     demo.synod      the main file
     api/  app/  cache/  db/  lb/    one package per role
-synod.mod           module github.com/synodlang/examples, synod 0.2
+synod.mod           module github.com/synodlang/examples, synod 0.3
 ```
 
 Folders that build on others show how packages compose: `cassandra` runs
@@ -158,6 +158,6 @@ Synod is named after the Synod protocol, the core consensus algorithm in Leslie 
   were unchanged. `math.Hash` mixes FNV-1a with the MurmurHash3 finalizer
   so that keys such as `user:1` and `user:2` land far apart on the ring.
 
-Implements Synod 0.2 (specification: https://github.com/synodlang/dsl).
+Implements Synod 0.3 (specification: https://github.com/synodlang/dsl).
 
 Licensed under [CC BY 4.0](LICENSE).
