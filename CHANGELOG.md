@@ -5,6 +5,16 @@ text of its GitHub release page.
 
 ## Unreleased
 
+## v0.2.3 — 2026-10-28
+
+Implements Synod 0.2; follows dsl v0.2.14 and compiler v0.2.7.
+
+### Changed
+
+- `SKILL.md` and `AGENTS.md` now point to the documentation at https://synodlang.github.io/docs/v0.2/: the 15-chapter tutorial, the Library pages with a runnable example for each std package, the error pages and the guide for agents.
+- Re-stamped the hand-written files for dsl v0.2.14, which added the tutorial, the guides, the Library examples and decisions 103 to 111, and regenerated the references.
+- The pinned `synod` is now v0.2.7, whose `synod explain --json` example files include `synod.mod`; the examples pin v0.2.1 is unchanged.
+
 ## v0.2.2 — 2026-10-23
 
 Implements Synod 0.2; follows dsl v0.2.12.

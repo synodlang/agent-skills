@@ -5,7 +5,7 @@ Skills that teach coding agents, such as Claude Code, to read, write, check and 
 [![ci](https://github.com/synodlang/agent-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/synodlang/agent-skills/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
-Install it as a Claude Code plugin, or point any other agent at [AGENTS.md](AGENTS.md). Both teach the agent to look for an existing package, write Synod with the compiler's own checks, and confirm the run shows what was asked. The plan is in [08-agent-skills.md](https://github.com/synodlang/dsl/blob/main/implementation/08-agent-skills.md). You need the `synod` command ([install page](https://synodlang.github.io/install/)); the skills pin `synod` v0.2.6.
+Install it as a Claude Code plugin, or point any other agent at [AGENTS.md](AGENTS.md). Both teach the agent to look for an existing package, write Synod with the compiler's own checks, and confirm the run shows what was asked. The plan is in [08-agent-skills.md](https://github.com/synodlang/dsl/blob/main/implementation/08-agent-skills.md). You need the `synod` command ([install page](https://synodlang.github.io/install/)); the skills pin `synod` v0.2.7.
 
 ## Install
 
@@ -39,7 +39,7 @@ An agent follows these skills to write Synod, and uses the `synod` command to ch
 | Repository | What it is | Status |
 | --- | --- | --- |
 | [dsl](https://github.com/synodlang/dsl) | The language specification and implementation guides | Spec v0.2 |
-| [compiler](https://github.com/synodlang/compiler) | The `synod` command: `fmt`, `check`, `run`, `doc`, `explain`, `new`, `get`, `mcp` | v0.2.6 released |
+| [compiler](https://github.com/synodlang/compiler) | The `synod` command: `fmt`, `check`, `run`, `doc`, `explain`, `new`, `get`, `mcp` | v0.2.7 released |
 | [std](https://github.com/synodlang/std) | The standard library packages | In use by the compiler |
 | [examples](https://github.com/synodlang/examples) | Sample programs and acceptance tests | Available |
 | [player](https://github.com/synodlang/player) | Canvas library that plays `scene.json` | Planned (M7) |
@@ -82,7 +82,7 @@ versions.env                     the pinned dsl, synod and examples releases
 tools/sync/                      regenerates the generated files
 ```
 
-`grammar.md`, `phrases.md` and `contexts.md` are written by hand, each stamped with the `dsl` tag it was condensed from. Everything marked generated comes from the releases pinned in `versions.env`: `dsl` v0.2.10, `synod` v0.2.6 and examples v0.2.1. The copy in `reference/examples/` is under the examples repository's [CC BY 4.0](https://github.com/synodlang/examples/blob/main/LICENSE) licence.
+`grammar.md`, `phrases.md` and `contexts.md` are written by hand, each stamped with the `dsl` tag it was condensed from. Everything marked generated comes from the releases pinned in `versions.env`: `dsl` v0.2.14, `synod` v0.2.7 and examples v0.2.1. The copy in `reference/examples/` is under the examples repository's [CC BY 4.0](https://github.com/synodlang/examples/blob/main/LICENSE) licence.
 
 ## Using synod from an agent today
 
