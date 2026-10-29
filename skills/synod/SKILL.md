@@ -6,7 +6,7 @@ description: Read, write, check and run Synod (.synod) programs that model
   "animate" or "simulate" a protocol in a Synod workspace.
 ---
 
-<!-- written for dsl v0.3.0 -->
+<!-- written for dsl v0.3.1 -->
 
 # Writing Synod
 
@@ -208,4 +208,4 @@ the Library pages (`library/`, with a runnable example for each std package,
 also in `std/examples` of the dsl repository) and the error pages (`errors/`).
 Its guide "Use Synod with Claude or another agent" explains this skill.
 
-Written for dsl v0.3.0.
+Written for dsl v0.3.1.

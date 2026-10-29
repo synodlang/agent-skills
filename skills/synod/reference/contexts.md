@@ -1,4 +1,4 @@
-<!-- condensed from dsl v0.3.0 spec/05 -->
+<!-- condensed from dsl v0.3.1 spec/05 -->
 
 # Nodes, state and contexts
 

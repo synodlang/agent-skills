@@ -3,14 +3,9 @@
 All notable changes to the skills. Each released version's section is the
 text of its GitHub release page.
 
-## Unreleased
-
-- The std catalog says `sim.StateRows` rows have at most 24 characters, and the `ringlook` example draws discs with a column of keys per owner.
-- The vendored `paxos` example keeps its promise, accepted proposal and round on `std/disk`, so it stays correct after a crash and restart.
-
 ## v0.3.0 — 2026-10-29
 
-Implements Synod 0.3; follows dsl v0.3.0 and compiler v0.3.0.
+Implements Synod 0.3; follows dsl v0.3.1 and compiler v0.3.0.
 
 ### Added
 
@@ -19,8 +14,10 @@ Implements Synod 0.3; follows dsl v0.3.0 and compiler v0.3.0.
 
 ### Changed
 
-- Re-stamped the hand-written files for dsl v0.3.0 and regenerated the references; the pins are `synod` v0.3.0 and examples v0.3.0.
+- Re-stamped the hand-written files for dsl v0.3.1 and regenerated the references; the pins are `synod` v0.3.0 and examples v0.3.0.
 - `tools/sync` writes the `synod 0.3` module for the code-block check, and the stale job looks for `v0.3.x` tags.
+- The std catalog says `sim.StateRows` rows have at most 24 characters, and the `ringlook` example draws discs with a column of keys per owner.
+- The vendored `paxos` example keeps its promise, accepted proposal and round on `std/disk`, so it stays correct after a crash and restart.
 
 ## v0.2.3 — 2026-10-28
 
