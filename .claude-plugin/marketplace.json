@@ -3,6 +3,9 @@
   "owner": {
     "name": "synodlang"
   },
+  "metadata": {
+    "description": "Agent skills for the Synod language: read, write, check and run Synod programs that model distributed systems."
+  },
   "plugins": [
     {
       "name": "synod",
