@@ -6,6 +6,7 @@ text of its GitHub release page.
 ## Unreleased
 
 - The std catalog says `sim.StateRows` rows have at most 24 characters, and the `ringlook` example draws discs with a column of keys per owner.
+- The vendored `paxos` example keeps its promise, accepted proposal and round on `std/disk`, so it stays correct after a crash and restart.
 
 ## v0.3.0 — 2026-10-29
 

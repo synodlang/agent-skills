@@ -53,7 +53,7 @@ The run is deterministic: the same seed gives the same trace, byte for byte.
 | --- | --- | --- | --- | --- |
 | `tcp` | TCP three-way handshake | SYN, SYN-ACK, ACK and the state changes on both ends | 1 (default) | `synod run ./tcp` |
 | `gossip` | Gossip membership and failure detection | Heartbeats spreading; a crashed node marked down after 4s; generations after restart | 15 | `synod run ./gossip` |
-| `paxos` | Single-decree Paxos (the Synod protocol) | Two racing proposers; the higher ballot adopts any accepted value; the invariant "at most one chosen value" | 105 | `synod run ./paxos` |
+| `paxos` | Single-decree Paxos (the Synod protocol) | Two racing proposers; the higher ballot adopts any accepted value; the invariant "at most one chosen value"; promises and accepted values on `std/disk`, so a restarted node keeps them | 105 | `synod run ./paxos` |
 | `raft` + `raftlook` | Raft leader election | Randomized timeouts, votes, a leader crash, a new term; "never two leaders in a term" | 3 | `synod run ./raft` |
 | `twopc` | Two-phase commit | The blocking problem when the coordinator crashes between phases; the atomicity invariant | 1 | `synod run ./twopc` |
 | `ring` + `ringlook` | Consistent hashing with virtual nodes | Which keys move when a fifth node joins | 1 (default) | `synod run ./ring` |
