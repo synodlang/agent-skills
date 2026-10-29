@@ -5,6 +5,8 @@ text of its GitHub release page.
 
 ## Unreleased
 
+- The std catalog says `sim.StateRows` rows have at most 24 characters, and the `ringlook` example draws discs with a column of keys per owner.
+
 ## v0.3.0 — 2026-10-29
 
 Implements Synod 0.3; follows dsl v0.3.0 and compiler v0.3.0.
